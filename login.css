@@ -1,0 +1,59 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body{
+    background-image: linear-gradient(#7a002f ,#cc076d);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+h1{
+    text-align: center;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 400%;
+}
+
+div.header{
+    background-color: #52001f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 4%;
+}
+
+p.right{
+    margin-right: 10px;
+    text-align: right;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #7a002f;
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    border: 1px solid #1c1c1c;
+    cursor: url(imgs/caja-de-palomitas-de-maiz.ico), auto;
+  }
+
+  
+
+
+div.registro{
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 150%;
+    display: flex; /* Activa el modelo de diseño flexbox */
+    align-items: center; /* Alinea verticalmente el contenido al centro */
+    justify-content: center; /* Alinea horizontalmente el contenido al centro */
+    height: 50vh; /* Establece una altura del 100% del viewport */
+}
+
+.inputText{
+    height: 40px;
+}
+
