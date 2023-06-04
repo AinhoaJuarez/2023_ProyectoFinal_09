@@ -1,19 +1,127 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link rel="stylesheet" type="text/css" href="loginDeVd.css">
-</head>
-<body>
-  <div class="background">
-    
-        <div class="login">
-            <p><b>Usuario:</b></p>&nbsp;&nbsp;<input type="text">
+  <head>
+    <link rel="stylesheet" type="text/css" href="loginDeVd.css">
+    <link rel="icon" href="imgs/logoogogo.jpg" type="image/x-icon">
+    <style>
+      .close {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background">
+      <div class="login">
+        <p><b>Usuario:</b></p>&nbsp;&nbsp;<input type="text" id="usuario">
+        <br>
+        <p><b>Contraseña:</b></p>&nbsp;&nbsp;<input type="password" id="contrasena">
+        <br>
+        
+        <p><a href="#" id="olvideContrasenaLink">Olvidé mi contraseña</a></p>
+        <p><button class="button" id="entrarButton"><b>Entrar</b></button></p>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p><b>Usuario:</b></p>&nbsp;&nbsp;<input type="text" id="usuarioCambio">
             <br>
-            <p><b>Contraseña:</b></p>&nbsp;&nbsp;<input type="text">
-            <a href="olvido_pwd.html">Has olvidado la contraseña?</a>
+            <p><b>Nueva contraseña:</b></p>&nbsp;&nbsp;<input type="password" id="contrasenaNueva1">
             <br>
-            <p><a href="PPrincipal.html" class="button"><b>Entrar</b></a></p>
+            <p><b>Confirmar contraseña:</b></p>&nbsp;&nbsp;<input type="password" id="contrasenaNueva2">
+            <br>
+            <p><b>Fecha de nacimiento:</b></p>&nbsp;&nbsp;<input type="date" id="fechaNacimiento">
+            <br>
+            <p><button class="button" onclick="cambiarContrasena()"><b>Cambiar contraseña</b></button></p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</body>
+
+    <script>
+      document.getElementById("entrarButton").addEventListener("click", iniciarSesion);
+
+      // Obtener el elemento del enlace "Olvidé mi contraseña"
+      var olvideContrasenaLink = document.getElementById("olvideContrasenaLink");
+
+      // Agregar un evento de escucha para el clic en el enlace
+      olvideContrasenaLink.addEventListener("click", function(event) {
+        event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+
+        // Mostrar la ventana modal
+        var modal = document.getElementById("modal");
+        modal.style.display = "block";
+      });
+
+      function iniciarSesion() {
+        var usuario = document.getElementById("usuario").value;
+        var contrasena = document.getElementById("contrasena").value;
+
+        // Obtener el usuario registrado desde sessionStorage
+        var usuarioRegistrado = sessionStorage.getItem('usuario');
+
+        if (usuarioRegistrado) {
+          // Convertir el usuario registrado de JSON a objeto
+          usuarioRegistrado = JSON.parse(usuarioRegistrado);
+
+          // Verificar si las credenciales coinciden
+          if (usuario === usuarioRegistrado.username && contrasena === usuarioRegistrado.password) {
+            // Inicio de sesión exitoso, redireccionar a la página principal
+            window.location.href = 'menu.html';
+          } else {
+            alert('Credenciales inválidas. Por favor, intente nuevamente.');
+          }
+        } else {
+          alert('No se encontró un usuario registrado. Por favor, regístrese primero.');
+        }
+      }
+
+      function cambiarContrasena() {
+        var usuarioCambio = document.getElementById("usuarioCambio").value;
+        var contrasenaNueva1 = document.getElementById("contrasenaNueva1").value;
+        var contrasenaNueva2 = document.getElementById("contrasenaNueva2").value;
+        var fechaNacimiento = document.getElementById("fechaNacimiento").value;
+
+        if (contrasenaNueva1 === contrasenaNueva2) {
+          // Realizar el cambio de contraseña
+          var usuarioRegistrado = sessionStorage.getItem('usuario');
+
+          if (usuarioRegistrado) {
+            // Convertir el usuario registrado de JSON a objeto
+            usuarioRegistrado = JSON.parse(usuarioRegistrado);
+
+            if (usuarioCambio === usuarioRegistrado.username) {
+              if (fechaNacimiento === usuarioRegistrado.fechaNacimiento) {
+                // Cambiar la contraseña en el objeto de usuario
+                usuarioRegistrado.password = contrasenaNueva1;
+
+                // Guardar el usuario actualizado en sessionStorage
+                sessionStorage.setItem('usuario', JSON.stringify(usuarioRegistrado));
+
+                alert('Contraseña cambiada con éxito. Redireccionando al menú principal...');
+                setTimeout(function() {
+                  window.location.href = 'menu.html';
+                }, 2000); // Esperar 2 segundos y redireccionar al menú principal
+              } else {
+                alert('La fecha de nacimiento no coincide. Inténtelo de nuevo más tarde.');
+              }
+            } else {
+              alert('El usuario no coincide. Inténtelo de nuevo.');
+            }
+          } else {
+            alert('No se encontró un usuario registrado. Por favor, regístrese primero.');
+          }
+        } else {
+          alert('Las contraseñas nuevas no coinciden. Inténtelo de nuevo.');
+        }
+      }
+
+      var closeButton = document.getElementsByClassName("close")[0];
+      closeButton.addEventListener("click", function() {
+        var modal = document.getElementById("modal");
+        modal.style.display = "none";
+      });
+    </script>
+  </body>
 </html>

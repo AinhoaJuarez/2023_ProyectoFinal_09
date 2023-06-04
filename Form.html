@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="registro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <title>Registro</title>
+    <link rel="icon" href="imgs/logoogogo.jpg" type="image/x-icon">
+</head>
+<body>
+    <br>
+    <h1>Registro de usuario</h1>
+    <br><br>
+    <div>
+        <p><label>Correo electrónico:</label>&nbsp;&nbsp; <input type="text" id="email"></p>
+        <p><label>Usuario:</label>&nbsp;&nbsp; <input type="text" id="username"></p>
+        <p><label>Contraseña:</label>&nbsp;&nbsp; <input type="password" id="password"></p>
+        <p><label>Nombre:</label>&nbsp;&nbsp; <input type="text" id="nombre"></p>
+        <p><label>Apellidos:</label>&nbsp;&nbsp; <input type="text" id="apellidos"></p>
+        <p><label>Fecha de nacimiento:</label>&nbsp;&nbsp; <input type="date" id="fechaNacimiento" max="2023-06-04" min="1960-01-01" value="2023-05-22"></p>
+        <br>
+        <p><button class="button" onclick="crearCuenta()">Crear cuenta</button></p>
+    </div>
+
+    <script>
+        function crearCuenta() {
+            var email = document.getElementById("email").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var nombre = document.getElementById("nombre").value;
+            var apellidos = document.getElementById("apellidos").value;
+            var fechaNacimiento = document.getElementById("fechaNacimiento").value;
+
+            // Aquí puedes realizar la validación de los campos y el registro en tu base de datos
+
+            // Validación simple de campos requeridos
+            if (email === '' || username === '' || password === '' || nombre === '' || apellidos === '' || fechaNacimiento === '') {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            // Almacenamiento en sessionStorage
+            var usuarioRegistrado = {
+                email: email,
+                username: username,
+                password: password,
+                nombre: nombre,
+                apellidos: apellidos,
+                fechaNacimiento: fechaNacimiento
+            };
+
+            // Almacenar el usuario en sessionStorage
+            sessionStorage.setItem('usuario', JSON.stringify(usuarioRegistrado));
+
+            // Redireccionar al menu
+            window.location.href = 'menu.html';
+        }
+    </script>
+</body>
+</html>

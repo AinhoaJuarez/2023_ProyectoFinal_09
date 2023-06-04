@@ -1,30 +1,66 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-body{
-    background-image: linear-gradient(#7a002f ,#cc076d);
+body {
+    background-image: linear-gradient(#7a002f, #cc076d);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    margin: 0;
+    padding: 0;
 }
 
-h1{
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('imgs/wallpaper3.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.18;
+    mix-blend-mode: screen;
+    z-index: -1;
+}
+
+h1 {
     text-align: center;
     color: white;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 400%;
+    font-size: 4em;
+    margin: 0;
+    padding: 20px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: moveUpDown 2s ease-in-out infinite alternate;
 }
 
-div.header{
+
+
+div.header {
     background-color: #52001f;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 4%;
+    padding: 0 4%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
 }
 
-p.right{
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+p.right {
     margin-right: 10px;
     text-align: right;
 }
@@ -35,25 +71,88 @@ p.right{
     background-color: #7a002f;
     color: white;
     text-decoration: none;
-    padding: 5px;
     border: 1px solid #1c1c1c;
     cursor: url(imgs/caja-de-palomitas-de-maiz.ico), auto;
-  }
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
 
-  
+.button:hover {
+    transform: translateY(-2px);
+}
 
-
-div.registro{
+div.registro {
     color: white;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 150%;
-    display: flex; /* Activa el modelo de diseño flexbox */
-    align-items: center; /* Alinea verticalmente el contenido al centro */
-    justify-content: center; /* Alinea horizontalmente el contenido al centro */
-    height: 50vh; /* Establece una altura del 100% del viewport */
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: moveLeftRight 2s ease-in-out infinite alternate;
 }
 
-.inputText{
+
+.inputText {
     height: 40px;
+    width: 300px;
+    margin-right: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+.movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.movie-card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+}
+
+.movie-img {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-img img {
+    transform: scale(1.1);
+}
+
+.movie-info {
+    padding: 10px;
+}
+
+.movie-info h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.movie-info p {
+    margin: 10px 0;
+}
